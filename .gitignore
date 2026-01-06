@@ -1,0 +1,39 @@
+# ========================
+# Python
+# ========================
+__pycache__/
+*.pyc
+*.pyo
+
+# ========================
+# Virtual Environment
+# ========================
+venv/
+.env
+.env.*
+
+# ========================
+# Flask
+# ========================
+instance/
+*.log
+
+# ========================
+# Uploads / Generated files
+# ========================
+app/static/uploads/
+static/uploads/
+
+# ========================
+# QR Codes
+# ========================
+app/static/uploads/qrcodes/
+static/uploads/qrcodes/
+
+# ========================
+# OS / IDE
+# ========================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
