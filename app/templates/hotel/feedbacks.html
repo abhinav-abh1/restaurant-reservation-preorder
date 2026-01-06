@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Feedback</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Feedback CSS -->
+    <link rel="stylesheet" href="/static/css/hotel-feedback.css">
+</head>
+<body>
+
+<div class="feedback-page">
+
+    <!-- Header -->
+    <div class="feedback-header">
+        <h2>Customer Feedback</h2>
+        <a href="/hotel/dashboard" class="back-link">⬅ Back to Dashboard</a>
+    </div>
+
+    <!-- Feedback Content -->
+    {% if feedbacks %}
+    <div class="feedback-card">
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Rating</th>
+                        <th>Feedback</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for f in feedbacks %}
+                    <tr>
+                        <td>{{ f.user_name }}</td>
+                        <td>
+                            <span class="rating">
+                                {{ f.rating }} ⭐
+                            </span>
+                        </td>
+                        <td class="feedback-text">
+                            {{ f.feedback_text or "—" }}
+                        </td>
+                        <td>
+                            {{ f.created_at }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    {% else %}
+        <p class="empty-text">No feedback received yet.</p>
+    {% endif %}
+
+</div>
+
+</body>
+</html>

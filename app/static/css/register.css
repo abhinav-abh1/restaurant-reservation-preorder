@@ -1,0 +1,167 @@
+/* register.css */
+
+/* Overall page enhancements */
+body {
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c2 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card {
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.card-body {
+    padding: 3rem 2.5rem;
+    background-color: #ffffff;
+}
+
+h2 {
+    font-weight: 700;
+    color: #1e293b;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Form labels */
+.form-label {
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.5rem;
+}
+
+.text-danger {
+    font-weight: bold;
+}
+
+/* Input focus styling - Updated to Warm Amber / Terracotta theme */
+.form-control:focus,
+textarea.form-control:focus {
+    border-color: #d97706;
+    box-shadow: 0 0 0 0.25rem rgba(217, 119, 6, 0.2);
+}
+
+/* Toggle switch styling - Updated to Warm Amber */
+.form-check-input:checked {
+    background-color: #d97706;
+    border-color: #d97706;
+}
+
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.25rem rgba(217, 119, 6, 0.25);
+    border-color: #d97706;
+}
+
+.toggle-label {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #4b5563;
+}
+
+/* Register Button - Updated to Warm Amber / Terracotta theme */
+.btn-register {
+    background-color: #d97706;
+    border: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 14px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(217, 119, 6, 0.3);
+    margin-top: 1.5rem;
+}
+
+.btn-register:hover {
+    background-color: #b45309;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(217, 119, 6, 0.4);
+}
+
+.btn-register:active {
+    transform: translateY(0);
+}
+
+/* Flash messages */
+.alert {
+    border-radius: 12px;
+    border: none;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+
+.alert-success {
+    background-color: #ecfdf5;
+    color: #065f46;
+}
+
+.alert-danger {
+    background-color: #fef2f2;
+    color: #991b1b;
+}
+
+/* Login link - Updated to Warm Amber */
+.login-link {
+    color: #d97706;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.login-link:hover {
+    color: #b45309;
+    text-decoration: underline;
+}
+
+/* Top-left brand (icon + name) */
+.brand {
+    position: absolute;
+    top: 22px;
+    left: 22px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #d97706;
+    font-weight: 700;
+    font-size: 1.15rem;   /* ⬆ name size */
+}
+
+.brand i {
+    font-size: 1.3rem;   /* ⬆ icon size */
+}
+
+
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .card-body {
+        padding: 2rem 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    .toggle-label {
+        font-size: 1rem;
+    }
+
+    .d-flex.align-items-center.justify-content-center {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .form-check-input {
+        width: 4em !important;
+        height: 2em !important;
+    }
+}
+
+@media (max-width: 400px) {
+    .card-body {
+        padding: 1.5rem 1rem;
+    }
+}

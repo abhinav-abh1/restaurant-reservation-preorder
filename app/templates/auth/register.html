@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Restaurant Reservation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+</head>
+<body>
+     
+    <div class="brand">
+    <i class="fas fa-utensils"></i>
+    <span>Smart Dine</span>
+</div>
+
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h2>Create Account</h2>
+
+                        
+                        <form action="{{ url_for('auth.register') }}" method="POST" enctype="multipart/form-data">
+                            <!-- Email -->
+                            <div class="mb-4">
+                                <label class="form-label">Email <span class="text-danger">*</span></label>
+                                <input type="email" class="form-control form-control-lg" name="email" required>
+                            </div>
+
+                            <!-- Password -->
+                            <div class="mb-4">
+                                <label class="form-label">Password <span class="text-danger">*</span></label>
+                                <input type="password" class="form-control form-control-lg" name="password" required minlength="6">
+                            </div>
+
+                            <!-- Confirm Password -->
+                            <div class="mb-4">
+                                <label class="form-label">Confirm Password <span class="text-danger">*</span></label>
+                                <input type="password" class="form-control form-control-lg" name="confirm_password" required>
+                            </div>
+
+                            <!-- Role Toggle -->
+                            <div class="d-flex align-items-center justify-content-center mb-5">
+                                <span class="toggle-label me-4">Customer</span>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="roleToggle" style="width: 4em; height: 2em;">
+                                </div>
+                                <span class="toggle-label ms-4">Hotel Owner</span>
+                            </div>
+
+                            <input type="hidden" name="role" id="roleField" value="user">
+
+                            <!-- Customer Fields -->
+                            <div id="userFields">
+                                <div class="mb-4">
+                                    <label class="form-label">Full Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control form-control-lg" name="user_full_name" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label">Phone</label>
+                                    <input type="text" class="form-control form-control-lg" name="user_phone">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label">Address</label>
+                                    <textarea class="form-control" name="user_address" rows="3"></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Hotel Fields -->
+                            <div id="hotelFields" style="display: none;">
+                                <div class="mb-4">
+                                    <label class="form-label">Hotel Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control form-control-lg" name="hotel_name">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label">Owner Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control form-control-lg" name="owner_name">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label">Hotel Phone <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control form-control-lg" name="phone">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label">Address <span class="text-danger">*</span></label>
+                                    <textarea class="form-control" name="address" rows="3"></textarea>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label">Location/City <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control form-control-lg" name="location">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label">License Number <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control form-control-lg" name="license_number">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label">License Document <span class="text-danger">*</span></label>
+                                    <input type="file" class="form-control" name="license_document" accept="image/*,.pdf">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label">Hotel Profile Image (Optional)</label>
+                                    <input type="file" class="form-control" name="profile_image" accept="image/*">
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-register btn-lg w-100">Register</button>
+                        </form>
+
+                        <p class="text-center mt-4">
+                            Already have an account? 
+                            <a href="{{ url_for('auth.login') }}" class="login-link">Login here</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const toggle = document.getElementById('roleToggle');
+        const userFields = document.getElementById('userFields');
+        const hotelFields = document.getElementById('hotelFields');
+        const roleField = document.getElementById('roleField');
+
+        function updateFieldRequirements() {
+            if (toggle.checked) {
+                // Hotel Mode
+                userFields.style.display = 'none';
+                hotelFields.style.display = 'block';
+                roleField.value = 'hotel';
+
+                userFields.querySelectorAll('input, textarea').forEach(el => {
+                    el.disabled = true;
+                    el.removeAttribute('required');
+                });
+
+                hotelFields.querySelectorAll('input, textarea').forEach(el => {
+                    el.disabled = false;
+                    el.setAttribute('required', '');
+                });
+            } else {
+                // Customer Mode
+                userFields.style.display = 'block';
+                hotelFields.style.display = 'none';
+                roleField.value = 'user';
+
+                userFields.querySelectorAll('input, textarea').forEach(el => {
+                    el.disabled = false;
+                    if (el.name === 'user_full_name') {
+                        el.setAttribute('required', '');
+                    } else {
+                        el.removeAttribute('required');
+                    }
+                });
+
+                hotelFields.querySelectorAll('input, textarea').forEach(el => {
+                    el.disabled = true;
+                    el.removeAttribute('required');
+                });
+            }
+        }
+
+        // Initialize on load
+        updateFieldRequirements();
+
+        // Update on toggle
+        toggle.addEventListener('change', updateFieldRequirements);
+    </script>
+</body>
+</html>

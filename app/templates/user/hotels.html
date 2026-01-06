@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/find-hotels.css">
+
+    <title>Find Hotels</title>
+
+    
+</head>
+<body>
+
+<h2>Find Hotels</h2>
+
+<!-- 🔍 Search Form -->
+<form method="get">
+    <input type="text"
+           name="search"
+           placeholder="Search by hotel or location"
+           value="{{ search | default('') }}">
+    <button type="submit">Search</button>
+</form>
+<a href="{{ url_for('user.dashboard') }}" class="back-link">
+    ⬅ Back to Dashboard
+</a>
+<hr>
+
+<!-- 🏨 Hotel List -->
+{% if hotels %}
+    <div class="hotel-grid">
+        {% for h in hotels %}
+            <div class="hotel-card">
+
+                <!-- Hotel Image -->
+                {% if h.profile_image %}
+                    <img src="{{ url_for('static',
+                        filename='uploads/hotel_profiles/' ~ h.profile_image) }}"
+                         alt="{{ h.hotel_name }}">
+                {% else %}
+                    <img src="{{ url_for('static',
+                        filename='images/default-hotel.png') }}"
+                         alt="Default Hotel">
+                {% endif %}
+
+                <!-- Hotel Info -->
+                <h3>{{ h.hotel_name }}</h3>
+                <p>📍 {{ h.location }}</p>
+                <p>📞 {{ h.phone }}</p>
+
+                <!-- View Menu -->
+                <a href="{{ url_for('user.menu', hotel_id=h.id) }}" class="btn">
+    View Menu
+</a>
+
+
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p style="text-align:center;">No hotels found.</p>
+{% endif %}
+
+<!-- Back -->
+
+
+</body>
+</html>

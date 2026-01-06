@@ -1,0 +1,179 @@
+:root {
+  --bg: #FAF7F2;
+  --card: #FFFFFF;
+  --primary: #556B2F;
+  --accent: #C9A24D;
+  --text: #2B2B2B;
+  --muted: #6B7280;
+  --border: #E6E2D9;
+  --danger: #9B1C1C;
+}
+
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Body */
+body {
+  font-family: "Inter", "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Back link */
+.back-link {
+  display: inline-block;
+  margin: 20px;
+  text-decoration: none;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+/* Container */
+.container {
+  max-width: 1000px;
+  margin: 20px auto 50px;
+  padding: 0 20px;
+}
+
+.container h2 {
+  margin-bottom: 20px;
+  font-size: 26px;
+}
+
+/* Order Card */
+.order-card {
+  background: var(--card);
+  padding: 22px;
+  border-radius: 20px;
+  margin-bottom: 24px;
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.06);
+}
+
+/* Order Info */
+.order-info {
+  flex: 1;
+}
+
+.order-info p {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.order-info b {
+  color: var(--text);
+}
+
+/* Status */
+.status {
+  font-weight: 700;
+  margin-top: 6px;
+  text-transform: capitalize;
+}
+
+.status b {
+  color: var(--primary);
+}
+
+/* QR Box */
+.qr-box {
+  min-width: 180px;
+  text-align: center;
+}
+
+.qr-box img {
+  width: 130px;
+  border-radius: 12px;
+  border: 1px dashed var(--accent);
+  padding: 8px;
+  background: #fff;
+}
+
+/* Buttons */
+.download-btn,
+.submit-btn {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #556B2F, #6E8741);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.download-btn:hover,
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(85,107,47,0.35);
+}
+
+/* Feedback Box */
+.feedback-box {
+  background: #FFFDF8;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.feedback-box h4 {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+/* Inputs */
+.feedback-box select,
+.feedback-box textarea {
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.feedback-box textarea {
+  resize: vertical;
+}
+
+.feedback-box select:focus,
+.feedback-box textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(85,107,47,0.15);
+}
+
+/* Empty state */
+.container p {
+  color: var(--muted);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .order-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .qr-box {
+    text-align: center;
+  }
+}

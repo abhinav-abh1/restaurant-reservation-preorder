@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotel Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Dashboard CSS -->
+    <link rel="stylesheet" href="/static/css/hotel-dashboard.css">
+</head>
+<body>
+<div class="brand">
+    <i class="fas fa-utensils"></i>
+    <span>Smart Dine</span>
+</div>
+<!-- 🌿 Page Overlay -->
+<div class="page-bg">
+  <div class="page-overlay">
+    <!-- 🔝 Header -->
+    <header class="dashboard-header">
+        <div class="header-left">
+            <h2>Hotel Dashboard</h2>
+            <p class="hotel-name">{{ hotel.hotel_name }}</p>
+        </div>
+
+        <a href="/logout" class="logout-btn">Logout</a>
+    </header>
+
+    <!-- 📊 Status Section -->
+    <section class="status-section">
+
+        <div class="status-card">
+            <p class="label">Approval Status</p>
+            <span class="badge approved">
+                {{ hotel.status | upper }}
+            </span>
+        </div>
+
+        <div class="status-card">
+            <p class="label">Hotel Availability</p>
+            {% if hotel.is_open %}
+                <span class="badge open">OPEN</span>
+            {% else %}
+                <span class="badge closed">CLOSED</span>
+            {% endif %}
+        </div>
+
+        <div class="status-card toggle-card">
+            <p class="label">Toggle Availability</p>
+
+            <form method="post" action="/hotel/toggle-status">
+                <label class="toggle-switch">
+                    <input type="checkbox" name="is_open"
+                           {% if hotel.is_open %}checked{% endif %}
+                           onchange="this.form.submit()">
+                    <span class="toggle-slider"></span>
+                </label>
+            </form>
+        </div>
+
+    </section>
+
+    <!-- 🧩 Management Cards -->
+    <section class="management-section">
+
+        <a href="/hotel/menu" class="manage-card">
+            <img src="/static/images/dashboard/menu2.png">
+            <h4>Manage Menu</h4>
+            <p>Add, update & control food items</p>
+        </a>
+
+        <a href="/hotel/orders" class="manage-card">
+            <img src="/static/images/dashboard/vieworders.png">
+            <h4>View Orders</h4>
+            <p>Track incoming & completed orders</p>
+        </a>
+
+        <a href="/hotel/feedbacks" class="manage-card">
+            <img src="/static/images/dashboard/feedback3.png">
+            <h4>View Feedback</h4>
+            <p>Customer ratings & reviews</p>
+        </a>
+
+        <a href="/hotel/profile" class="manage-card">
+            <img src="/static/images/dashboard/profile2.png">
+            <h4>My Profile</h4>
+            <p>Edit hotel details & settings</p>
+        </a>
+
+    </section>
+
+</div>
+</div>
+</body>
+</html>

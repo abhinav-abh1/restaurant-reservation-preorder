@@ -1,0 +1,281 @@
+/* ==========================
+   THEME VARIABLES
+========================== */
+:root {
+  --primary: #6B8E23;      /* Olive */
+  --accent: #D9822B;       /* Terracotta */
+  --success: #2E7D32;
+  --danger: #9B1C1C;
+  --text: #2B2B2B;
+  --muted: #6B7280;
+  --card: #FFFFFF;
+  --border: #E4DED4;
+}
+
+/* ==========================
+   RESET
+========================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ==========================
+   BASE
+========================== */
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: "Inter", "Segoe UI", sans-serif;
+  color: var(--text);
+}
+
+/* ==========================
+   BACKGROUND HOLDER
+========================== */
+.page-bg {
+  min-height: 100vh;
+  width: 100%;
+
+  /* 🔥 BACKGROUND IMAGE */
+  background:
+    linear-gradient(
+      rgba(250, 246, 239, 0.88),
+      rgba(250, 246, 239, 0.88)
+    ),
+    url("/static/images/dashboard/hotel-bg.png");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* ==========================
+   CONTENT LAYER
+========================== */
+.page-overlay {
+  min-height: 100vh;
+  background: transparent;
+  padding: 40px 20px 60px;
+}
+
+/* ==========================
+   HEADER
+========================== */
+.dashboard-header {
+  max-width: 1200px;
+  margin: 0 auto 32px;
+  background: var(--card);
+  padding: 26px 30px;
+  border-radius: 22px;
+  border: 1px solid var(--border);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.08);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dashboard-header h2 {
+  font-size: 28px;
+}
+
+.hotel-name {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ==========================
+   LOGOUT BUTTON
+========================== */
+.logout-btn {
+  background: var(--accent);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 16px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.25s ease;
+}
+
+.logout-btn:hover {
+  background: #C46F1F;
+  box-shadow: 0 6px 18px rgba(217,130,43,0.45);
+}
+
+/* ==========================
+   STATUS SECTION
+========================== */
+.status-section {
+  max-width: 1200px;
+  margin: 0 auto 40px;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.status-card {
+  background: var(--card);
+  padding: 22px;
+  border-radius: 22px;
+  border: 1px solid var(--border);
+  text-align: center;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.06);
+}
+
+.label {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+/* ==========================
+   BADGES
+========================== */
+.badge {
+  display: inline-block;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.badge.approved,
+.badge.open {
+  background: #E6F4EA;
+  color: var(--success);
+}
+
+.badge.closed {
+  background: #FBEAEA;
+  color: var(--danger);
+}
+
+/* ==========================
+   TOGGLE SWITCH
+========================== */
+.toggle-card form {
+  display: flex;
+  justify-content: center;
+}
+
+.toggle-switch {
+  position: relative;
+  width: 64px;
+  height: 34px;
+}
+
+.toggle-switch input {
+  display: none;
+}
+
+.toggle-slider {
+  position: absolute;
+  inset: 0;
+  background: #ccc;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.toggle-slider::before {
+  content: "";
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  background: #fff;
+  border-radius: 50%;
+  top: 4px;
+  left: 4px;
+  transition: 0.3s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background: var(--primary);
+}
+
+.toggle-switch input:checked + .toggle-slider::before {
+  transform: translateX(30px);
+}
+
+/* ==========================
+   MANAGEMENT CARDS
+========================== */
+.management-section {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 26px;
+}
+
+.manage-card {
+  background: var(--card);
+  border-radius: 24px;
+  padding: 26px;
+  text-decoration: none;
+  color: var(--text);
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.07);
+  transition: 0.35s ease;
+}
+
+.manage-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 42px rgba(0,0,0,0.12);
+}
+
+.manage-card img {
+  width: 72px;
+  margin-bottom: 16px;
+}
+
+.manage-card h4 {
+  margin-bottom: 6px;
+}
+
+.manage-card p {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* Top-left brand (icon + name) */
+.brand {
+    position: absolute;
+    top: 22px;
+    left: 22px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #d97706;
+    font-weight: 700;
+    font-size: 1.15rem;   /* ⬆ name size */
+}
+
+.brand i {
+    font-size: 1.3rem;   /* ⬆ icon size */
+}
+
+
+/* ==========================
+   MOBILE
+========================== */
+@media (max-width: 600px) {
+  .dashboard-header {
+    flex-direction: column;
+    gap: 14px;
+    text-align: center;
+  }
+
+  .logout-btn {
+    width: 100%;
+    text-align: center;
+  }
+}

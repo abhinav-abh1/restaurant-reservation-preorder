@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management - Admin Panel</title>
+    
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <!-- Shared Custom CSS - CHANGE TO YOUR ACTUAL FILENAME -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin-user-management.css') }}">
+</head>
+<body>
+    <div class="user-management animate__animated animate__fadeIn">
+        <div class="section-header">
+            <h2>User Management</h2>
+            <p>View and manage all registered users</p>
+        </div>
+
+        <div class="table-container">
+            <table class="responsive-table">
+                <thead>
+                    <tr>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Premium Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for u in users %}
+                    <tr class="animate__animated animate__fadeInUp">
+                        <td data-label="Full Name"><strong>{{ u.user_full_name }}</strong></td>
+                        <td data-label="Email">{{ u.email }}</td>
+                        <td data-label="Phone">{{ u.user_phone or 'N/A' }}</td>
+                        <td data-label="Premium Status">
+                            {% if u.is_premium %}
+                                <span class="status-badge status-premium">
+                                    <i class="fas fa-crown"></i> Premium
+                                </span>
+                            {% else %}
+                                <span class="status-badge status-regular">
+                                    Regular
+                                </span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            {% if users|length == 0 %}
+            <div class="empty-state-table animate__animated animate__fadeIn">
+                <i class="fas fa-users fa-3x"></i>
+                <p>No users found.</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

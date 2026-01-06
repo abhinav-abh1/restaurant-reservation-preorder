@@ -1,0 +1,147 @@
+:root {
+  --primary: #6B8E23;
+  --accent: #D9822B;
+  --text: #2B2B2B;
+  --muted: #6B7280;
+  --card: #FFFFFF;
+  --border: #E4DED4;
+  --bg: #F3EFE8;
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body */
+body {
+  font-family: "Inter", "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Page */
+.profile-page {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+/* Header */
+.profile-header {
+  background: var(--card);
+  padding: 24px 28px;
+  border-radius: 22px;
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.06);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.profile-header h2 {
+  font-size: 26px;
+}
+
+/* Back */
+.back-link {
+  text-decoration: none;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Card */
+.profile-card {
+  background: var(--card);
+  padding: 30px;
+  border-radius: 26px;
+  border: 1px solid var(--border);
+  box-shadow: 0 14px 36px rgba(0,0,0,0.08);
+}
+
+/* Image Preview */
+.image-preview {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.image-preview img {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid var(--accent);
+}
+
+/* Form */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.form-group input[readonly] {
+  background: #F9F9F9;
+  color: var(--muted);
+}
+
+/* Grid */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.form-group.full {
+  grid-column: 1 / -1;
+}
+
+/* Button */
+.save-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 14px;
+  border-radius: 16px;
+  border: none;
+  background: linear-gradient(135deg, var(--primary), #7FA63A);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.save-btn:hover {
+  box-shadow: 0 10px 26px rgba(107,142,35,0.4);
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+}

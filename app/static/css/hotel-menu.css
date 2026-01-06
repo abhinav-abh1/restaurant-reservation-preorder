@@ -1,0 +1,278 @@
+/* ===============================
+   HOTEL MENU MANAGEMENT – MODERN & CLEAN CSS
+   Consistent with your olive (#6B8E23) / terracotta (#D9822B) theme,
+   elevated cards, soft shadows, improved spacing, and professional look.
+================================ */
+
+:root {
+  --primary: #6B8E23;      /* Olive Green */
+  --primary-dark: #5A7A1D;
+  --accent: #D9822B;       /* Terracotta */
+  --success: #2E7D32;
+  --danger: #9B1C1C;
+  --text: #2B2B2B;
+  --muted: #6B7280;
+  --light-bg: #F9F7F3;
+  --card-bg: #FFFFFF;
+  --border: #E4DED4;
+  --shadow-sm: 0 6px 18px rgba(0,0,0,0.06);
+  --shadow-md: 0 12px 32px rgba(0,0,0,0.08);
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+}
+
+/* ==========================
+   BODY & PAGE BACKGROUND
+========================== */
+body {
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+  background: linear-gradient(to bottom, #FAF9F5, #F3EFE8);
+  color: var(--text);
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+/* ==========================
+   BACK BUTTON
+========================== */
+a[href="/hotel/dashboard"] {
+  display: inline-block;
+  margin: 20px 0 10px 20px;
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+a[href="/hotel/dashboard"]:hover {
+  color: #C56F1F;
+  text-decoration: underline;
+}
+
+/* ==========================
+   MAIN CONTAINER CARD
+========================== */
+body > h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: var(--primary);
+  margin: 20px 0 40px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+}
+
+/* ==========================
+   SECTION HEADINGS
+========================== */
+h3 {
+  font-size: 1.5rem;
+  color: var(--primary);
+  margin: 40px 0 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--border);
+  position: relative;
+}
+h3::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+/* ==========================
+   FORMS (Add & Update)
+========================== */
+/* form {
+  background: var(--light-bg);
+  padding: 24px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  margin-bottom: 20px;
+} */
+
+input[type="text"],
+input[type="number"],
+input[type="file"],
+select {
+  width: 100%;
+  padding: 12px 16px;
+  margin: 12px 0;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 0.25rem rgba(107, 142, 35, 0.2);
+}
+
+small {
+  display: block;
+  color: var(--muted);
+  margin-top: -8px;
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+}
+
+/* ==========================
+   BUTTONS
+========================== */
+.add-btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.add-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(107, 142, 35, 0.35);
+}
+
+.update-btn {
+  background: var(--success);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.update-btn:hover {
+  background: #27692B;
+  transform: translateY(-2px);
+}
+
+.delete-btn {
+  background: var(--danger);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 8px;
+  transition: all 0.3s ease;
+}
+.delete-btn:hover {
+  background: #871717;
+  transform: translateY(-2px);
+}
+
+/* ==========================
+   TABLE
+========================== */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 12px;
+  margin-top: 20px;
+}
+
+th {
+  background: var(--primary);
+  color: white;
+  padding: 16px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+th:first-child { border-top-left-radius: var(--radius-md); }
+th:last-child { border-top-right-radius: var(--radius-md); }
+
+tr {
+  background: var(--card-bg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+}
+tr td {
+  padding: 16px;
+  vertical-align: middle;
+}
+tr td:first-child { border-top-left-radius: var(--radius-md); border-bottom-left-radius: var(--radius-md); }
+tr td:last-child { border-top-right-radius: var(--radius-md); border-bottom-right-radius: var(--radius-md); }
+
+/* Image in table */
+td img {
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Actions column */
+.actions {
+  white-space: nowrap;
+}
+
+/* ==========================
+   EMPTY STATE
+========================== */
+p {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--muted);
+  padding: 40px;
+  background: var(--light-bg);
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--border);
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+@media (max-width: 992px) {
+  .container {
+    padding: 20px;
+  }
+  table, th, td {
+    font-size: 0.9rem;
+  }
+  input, select, button {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+  form {
+    padding: 16px;
+  }
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  th, td {
+    min-width: 120px;
+  }
+  .actions button {
+    display: block;
+    width: 100%;
+    margin: 6px 0;
+  }
+}

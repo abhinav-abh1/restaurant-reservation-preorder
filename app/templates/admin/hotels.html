@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Management - Admin Panel</title>
+    
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Additional CSS: Animate.css for smooth animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <!-- Your Custom Admin CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin-hotel-management.css') }}">
+</head>
+<body>
+    <div class="hotel-management animate__animated animate__fadeIn">
+        <div class="section-header">
+            <h2>Hotel Management</h2>
+            <p>Review and manage hotel registrations</p>
+        </div>
+
+        <!-- Responsive Table Wrapper -->
+        <div class="table-container">
+            <table class="responsive-table">
+                <thead>
+                    <tr>
+                        <th>Hotel Name</th>
+                        <th>Owner</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>License</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for h in hotels %}
+                    <tr class="animate__animated animate__fadeInUp">
+                        <td data-label="Hotel Name"><strong>{{ h.hotel_name }}</strong></td>
+                        <td data-label="Owner">{{ h.owner_name }}</td>
+                        <td data-label="Email">{{ h.email }}</td>
+                        <td data-label="Status">
+                            <span class="status-badge status-{{ h.status|lower }}">
+                                {{ h.status|capitalize }}
+                            </span>
+                        </td>
+                        <td data-label="License">
+                            {% if h.license_document %}
+                                <a href="/static/uploads/licenses/{{ h.license_document }}" target="_blank" class="license-link">
+                                    <i class="fas fa-file-pdf"></i> View License
+                                </a>
+                            {% else %}
+                                <span class="na-text">N/A</span>
+                            {% endif %}
+                        </td>
+                        <td data-label="Actions">
+                            <form method="post" action="/admin/hotels/action" class="action-form">
+                                <input type="hidden" name="hotel_id" value="{{ h.id }}">
+                                
+                                <select name="action" class="action-select">
+                                    <option value="approved">Approve</option>
+                                    <option value="suspended">Suspend</option>
+                                    <option value="blacklisted">Blacklist</option>
+                                    <option value="rejected">Reject</option>
+                                </select>
+                                
+                                <input type="text" name="admin_remark" placeholder="Add remark (optional)" class="remark-input">
+                                
+                                <button type="submit" class="update-btn">
+                                    <i class="fas fa-check"></i> Update
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            {% if hotels|length == 0 %}
+            <div class="empty-state-table animate__animated animate__fadeIn">
+                <i class="fas fa-building fa-3x"></i>
+                <p>No hotels found.</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

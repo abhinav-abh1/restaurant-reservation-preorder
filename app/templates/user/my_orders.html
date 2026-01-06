@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/static/css/my-orders.css">
+
+    <title>My Orders</title>
+    
+</head>
+<body>
+
+<a href="{{ url_for('user.dashboard') }}" class="back-link">
+    ⬅ Back to Dashboard
+</a>
+
+<div class="container">
+    <h2>My Orders</h2>
+
+    {% if orders %}
+        {% for order in orders %}
+            <div class="order-card">
+
+                <!-- ORDER DETAILS -->
+                <div class="order-info">
+                    <p><b>Order ID:</b> {{ order.id }}</p>
+                    <p><b>Hotel:</b> {{ order.hotel_name }}</p>
+                    <p><b>Scheduled Time:</b> {{ order.scheduled_time }}</p>
+                    <p><b>Payment:</b> {{ order.payment_mode|upper }}</p>
+                    <p class="status">
+                        <b>Status:</b> {{ order.order_status }}
+                    </p>
+                </div>
+
+                <!-- QR OR FEEDBACK -->
+                <div class="qr-box">
+
+                    {% if order.order_status != 'completed' %}
+                        <!-- ACTIVE ORDER → QR -->
+                        {% if order.qr_image_url %}
+                            <img src="{{ order.qr_image_url }}" alt="QR Code">
+                            <br>
+                            <a href="{{ order.qr_image_url }}" download class="download-btn">
+                                Download QR
+                            </a>
+                        {% else %}
+                            <p>QR not generated</p>
+                        {% endif %}
+
+                    {% elif order.order_status == 'completed' and not order.feedback_given %}
+                        <!-- COMPLETED BUT NO FEEDBACK → SHOW FORM -->
+                        <div class="feedback-box">
+                            <h4>Give Feedback</h4>
+
+                            <form method="POST"
+                                  action="{{ url_for('user.submit_feedback', order_id=order.id) }}">
+
+                                <label>Rating</label>
+                                <select name="rating" required>
+                                    <option value="">Select</option>
+                                    <option value="1">1 ⭐</option>
+                                    <option value="2">2 ⭐⭐</option>
+                                    <option value="3">3 ⭐⭐⭐</option>
+                                    <option value="4">4 ⭐⭐⭐⭐</option>
+                                    <option value="5">5 ⭐⭐⭐⭐⭐</option>
+                                </select>
+
+                                <textarea name="feedback_text"
+                                          rows="3"
+                                          placeholder="Write your feedback (optional)"></textarea>
+
+                                <button type="submit" class="submit-btn">
+                                    Submit Feedback
+                                </button>
+                            </form>
+                        </div>
+                    {% endif %}
+
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No orders found.</p>
+    {% endif %}
+</div>
+
+</body>
+</html>

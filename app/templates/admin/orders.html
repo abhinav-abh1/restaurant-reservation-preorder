@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders Management - Admin Panel</title>
+    
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Animate.css for smooth animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <!-- Shared Custom CSS (use this one file for all admin pages) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin-orders-management.css') }}">
+</head>
+<body>
+    
+    <div class="orders-management animate__animated animate__fadeIn">
+        <div class="section-header">
+            <h2>Orders Management</h2>
+            <p>View and track all booking orders</p>
+        </div>
+
+        <!-- Responsive Table Wrapper -->
+        <div class="table-container">
+            <table class="responsive-table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>User</th>
+                        <th>Hotel</th>
+                        <th>People</th>
+                        <th>Total Amount</th>
+                        <th>Status</th>
+                        <th>Order Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for o in orders %}
+                    <tr class="animate__animated animate__fadeInUp">
+                        <td data-label="Order ID"><strong>#{{ o.id }}</strong></td>
+                        <td data-label="User">{{ o.user_name }}</td>
+                        <td data-label="Hotel">{{ o.hotel_name }}</td>
+                        <td data-label="People">{{ o.total_people }}</td>
+                        <td data-label="Total Amount"><strong>₹{{ o.total_amount }}</strong></td>
+                        <td data-label="Status">
+                            <span class="status-badge status-{{ o.order_status|lower|replace(' ', '-') }}">
+                                {{ o.order_status|capitalize }}
+                            </span>
+                        </td>
+                        <td data-label="Order Time">{{ o.order_time }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            {% if orders|length == 0 %}
+            <div class="empty-state-table animate__animated animate__fadeIn">
+                <i class="fas fa-shopping-bag fa-3x"></i>
+                <p>No orders found.</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

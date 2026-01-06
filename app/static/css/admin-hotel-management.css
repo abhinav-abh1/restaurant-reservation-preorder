@@ -1,0 +1,216 @@
+.hotel-management {
+    padding: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-header h2 {
+    font-size: 2.2rem;
+    color: #1e293b;
+    margin-bottom: 8px;
+}
+
+.section-header p {
+    color: #64748b;
+    font-size: 1.1rem;
+}
+
+.table-container {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    overflow-x: auto;
+}
+
+.responsive-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.responsive-table thead {
+    background: #6366f1;
+    color: #fff;
+}
+
+.responsive-table th {
+    padding: 18px 15px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.responsive-table td {
+    padding: 18px 15px;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: middle;
+}
+
+.responsive-table tr:hover {
+    background: #f8f9ff;
+    transition: background 0.3s ease;
+}
+
+/* Status Badges */
+.status-badge {
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.status-approved { background: #d4edda; color: #155724; }
+.status-suspended { background: #fff3cd; color: #856404; }
+.status-blacklisted { background: #f8d7da; color: #721c24; }
+.status-pending, .status-rejected { background: #e2e3e5; color: #41464b; }
+
+/* License Link */
+.license-link {
+    color: #6366f1;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.license-link:hover {
+    color: #4f46e5;
+    text-decoration: underline;
+}
+
+.na-text {
+    color: #94a3b8;
+    font-style: italic;
+}
+
+/* Action Form Styling */
+.action-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.action-select,
+.remark-input {
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+
+.action-select {
+    min-width: 120px;
+}
+
+.remark-input {
+    flex: 1;
+    min-width: 150px;
+}
+
+.update-btn {
+    background: #10b981;
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+}
+
+.update-btn:hover {
+    background: #059669;
+    transform: translateY(-2px);
+}
+
+/* Empty State */
+.empty-state-table {
+    text-align: center;
+    padding: 60px 20px;
+    color: #64748b;
+}
+
+.empty-state-table i {
+    color: #cbd5e1;
+    margin-bottom: 16px;
+}
+
+/* Mobile Responsiveness - Card View */
+@media (max-width: 768px) {
+    .responsive-table thead {
+        display: none;
+    }
+
+    .responsive-table tr {
+        display: block;
+        margin-bottom: 20px;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        background: #fff;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        padding: 15px;
+    }
+
+    .responsive-table td {
+        display: block;
+        text-align: right;
+        padding: 10px 0;
+        border: none;
+        position: relative;
+        padding-left: 120px;
+    }
+
+    .responsive-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        font-weight: 600;
+        color: #4b5563;
+        width: 100px;
+        text-align: left;
+    }
+
+    .responsive-table td[data-label="Hotel Name"] {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #1e293b;
+        text-align: left;
+        padding-left: 15px;
+    }
+
+    .responsive-table td[data-label="Hotel Name"]::before {
+        display: none;
+    }
+
+    .action-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .action-select,
+    .remark-input,
+    .update-btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .hotel-management {
+        padding: 20px 15px;
+    }
+
+    .section-header h2 {
+        font-size: 1.8rem;
+    }
+}

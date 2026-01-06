@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Menu</title>
+<link rel="stylesheet" href="/static/css/hotel-menu.css">
+
+    
+</head>
+<body>
+<a href="/hotel/dashboard">⬅ Back to Dashboard</a>
+<h2>🍽 Manage Menu</h2>
+
+<!-- ================= ADD MENU ================= -->
+<h3>Add New Menu Item</h3>
+
+<form method="post" enctype="multipart/form-data">
+
+    <input type="text" name="item_name" placeholder="Food Item Name" required>
+
+    <!-- MULTI SELECT CATEGORY -->
+    <label>Available For</label>
+    <select name="category" multiple required>
+        <option value="Breakfast">Breakfast</option>
+        <option value="Lunch">Lunch</option>
+        <option value="Dinner">Dinner</option>
+        <option value="Tea">Tea</option>
+    </select>
+    <small>Hold Ctrl (Windows) or Cmd (Mac) to select multiple</small>
+
+    <input type="number" step="0.01" name="price" placeholder="Price" required>
+
+    <input type="number" name="available_quantity" placeholder="Available Quantity" min="0" required>
+
+    <label>Food Image</label>
+    <input type="file" name="image" accept=".jpg,.jpeg,.png" required>
+
+    <button type="submit" class="add-btn">➕ Add Menu Item</button>
+</form>
+
+<hr>
+
+<!-- ================= MENU LIST ================= -->
+<h3>Menu List</h3>
+
+{% if menus %}
+<table>
+    <tr>
+        <th>Image</th>
+        <th>Item</th>
+        <th>Available For</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for m in menus %}
+    <tr>
+
+        <!-- UPDATE FORM -->
+        <form method="post" action="/hotel/menu/update" enctype="multipart/form-data">
+
+            <td>
+                {% if m.image %}
+                    <img src="/static/uploads/menu/{{ m.image }}" width="80"><br>
+                {% endif %}
+                <input type="file" name="image">
+            </td>
+
+            <td>
+                <input type="hidden" name="menu_id" value="{{ m.id }}">
+                <input type="text" name="item_name" value="{{ m.item_name }}" required>
+            </td>
+
+            <td>
+                {% set selected = m.category.split(',') %}
+                <select name="category" multiple required>
+                    {% for c in ['Breakfast','Lunch','Dinner','Tea'] %}
+                        <option value="{{ c }}"
+                            {% if c in selected %}selected{% endif %}>
+                            {{ c }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </td>
+
+            <td>
+                <input type="number" step="0.01" name="price" value="{{ m.price }}" required>
+            </td>
+
+            <td>
+                <input type="number" name="available_quantity"
+                       value="{{ m.available_quantity }}" min="0" required>
+            </td>
+
+            <td>
+                <select name="is_available">
+                    <option value="true" {% if m.is_available %}selected{% endif %}>
+                        Available
+                    </option>
+                    <option value="false" {% if not m.is_available %}selected{% endif %}>
+                        Unavailable
+                    </option>
+                </select>
+            </td>
+
+            <td class="actions">
+                <button type="submit" class="update-btn">Update</button>
+        </form>
+
+        <!-- DELETE FORM -->
+        <form method="post" action="/hotel/menu/delete"
+              onsubmit="return confirm('Delete this item?');">
+            <input type="hidden" name="menu_id" value="{{ m.id }}">
+            <button type="submit" class="delete-btn">Delete</button>
+        </form>
+            </td>
+
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No menu items added yet.</p>
+{% endif %}
+
+<br>
+
+
+</body>
+</html>

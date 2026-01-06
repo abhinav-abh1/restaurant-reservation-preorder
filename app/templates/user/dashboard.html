@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/static/css/user-dashboard.css">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+</head>
+
+<body>
+<div class="brand">
+    <i class="fas fa-utensils"></i>
+    <span>Smart Dine</span>
+</div>
+
+<div class="dashboard-container">
+
+  <!-- Header -->
+  <div class="dashboard-header">
+    <div>
+      <h2>User Dashboard</h2>
+      <p>Welcome, <span>{{ user.user_full_name }}</span></p>
+    </div>
+
+    <!-- Logout Top Right -->
+    <a href="/logout" class="logout-btn">
+      
+      Logout
+    </a>
+  </div>
+
+  <!-- Feature Cards -->
+  <div class="dashboard-cards">
+
+    <a href="/user/profile" class="dashboard-card highlight">
+      <img src="/static/images/dashboard/profile.png" alt="Profile">
+      <h4>My Profile</h4>
+      <p>View & update your personal details</p>
+    </a>
+
+    <a href="/user/hotels" class="dashboard-card">
+      <img src="/static/images/dashboard/hotel.png" alt="Hotels">
+      <h4>Search Hotels</h4>
+      <p>Find hotels & pre-book food</p>
+    </a>
+
+    <a href="/user/my_orders" class="dashboard-card">
+      <img src="/static/images/dashboard/orders.png" alt="Orders">
+      <h4>My Orders</h4>
+      <p>Track bookings & QR codes</p>
+    </a>
+
+  </div>
+
+</div>
+
+</body>
+</html>

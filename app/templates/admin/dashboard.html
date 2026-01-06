@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Top Header -->
+        <header class="top-header">
+            <div class="header-content">
+                <h1>Admin Dashboard</h1>
+                <a href="/logout" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
+            <p class="header-subtitle">Manage hotels, users, orders and feedbacks</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="dashboard-content">
+            <div class="welcome-section">
+                <h2>Welcome back, Admin!</h2>
+                <p>Select a module below to manage</p>
+            </div>
+
+            <!-- Navigation Cards Grid -->
+            <div class="cards-grid">
+                
+                <a href="/admin/hotels" class="nav-card">
+                    <i class="fas fa-hotel"></i>
+                    <h3>Hotels</h3>
+                    <p>Manage Hotels</p>
+                </a>
+                <a href="/admin/users" class="nav-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Users</h3>
+                    <p>Manage Users</p>
+                </a>
+                <a href="/admin/orders" class="nav-card">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h3>Orders</h3>
+                    <p>View & Manage Orders</p>
+                </a>
+                <a href="/admin/feedbacks" class="nav-card">
+                    <i class="fas fa-comment-dots"></i>
+                    <h3>Feedbacks</h3>
+                    <p>View Feedbacks</p>
+                </a>
+            </div>
+
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+</body>
+</html>

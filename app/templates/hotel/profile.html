@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hotel Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Hotel Profile CSS -->
+  <link rel="stylesheet" href="/static/css/hotel-profile.css">
+</head>
+<body>
+
+<div class="profile-page">
+
+  <!-- Header -->
+  <div class="profile-header">
+    <h2>Hotel Profile</h2>
+    <a href="/hotel/dashboard" class="back-link">⬅ Back to Dashboard</a>
+  </div>
+
+  <!-- Profile Card -->
+  <div class="profile-card">
+
+    <form method="post" enctype="multipart/form-data">
+
+      <!-- Profile Image -->
+      {% if hotel.profile_image %}
+      <div class="image-preview">
+        <img src="/static/uploads/hotel_profiles/{{ hotel.profile_image }}"
+             alt="Hotel Profile Image">
+      </div>
+      {% endif %}
+
+      <div class="form-group">
+        <label>Profile Image</label>
+        <input type="file" name="profile_image">
+      </div>
+
+      <!-- Two-column layout -->
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label>Hotel Name</label>
+          <input name="hotel_name" value="{{ hotel.hotel_name }}" required>
+        </div>
+
+        <div class="form-group">
+          <label>Owner Name</label>
+          <input name="owner_name" value="{{ hotel.owner_name }}" required>
+        </div>
+
+        <div class="form-group">
+          <label>Phone</label>
+          <input name="phone" value="{{ hotel.phone }}" required>
+        </div>
+
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email" value="{{ hotel.email }}">
+        </div>
+
+        <div class="form-group">
+          <label>Location</label>
+          <input name="location" value="{{ hotel.location }}" required>
+        </div>
+
+        <div class="form-group">
+          <label>License Number</label>
+          <input value="{{ hotel.license_number }}" readonly>
+        </div>
+
+      </div>
+
+      <div class="form-group full">
+        <label>Address</label>
+        <textarea name="address" rows="3" required>{{ hotel.address }}</textarea>
+      </div>
+
+      <div class="form-group full">
+        <label>Status</label>
+        <input value="{{ hotel.status }}" readonly>
+      </div>
+
+      <button type="submit" class="save-btn">Update Profile</button>
+
+    </form>
+
+  </div>
+
+</div>
+
+</body>
+</html>

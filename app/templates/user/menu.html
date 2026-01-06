@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ hotel.hotel_name }} – Menu</title>
+    <link rel="stylesheet" href="/static/css/user-hotel-menu.css">
+
+</head>
+
+<body>
+
+<h2>{{ hotel.hotel_name }} – Menu</h2>
+<p>📍 {{ hotel.location }}</p>
+
+<div class="section">
+    <label>Date & Time</label><br>
+    <input type="datetime-local" id="scheduleTime" required><br><br>
+
+    <label>Total People</label><br>
+    <input type="number" id="people" min="1" value="1">
+</div>
+
+<div class="menu-grid">
+{% for m in menus %}
+    <div class="item-card"
+     data-id="{{ m.id }}"
+     data-price="{{ m.price }}"
+     data-category="{{ m.category }}">
+
+        {% if m.image %}
+            <img src="{{ url_for('static', filename='uploads/menu/' ~ m.image) }}">
+        {% else %}
+            <img src="{{ url_for('static', filename='images/default-food.png') }}">
+        {% endif %}
+
+        <h4>{{ m.item_name }}</h4>
+        <p>{{ m.category }}</p>
+        <p>₹{{ m.price }}</p>
+        <p>Available: {{ m.available_quantity }}</p>
+
+        <input type="number"
+               class="qty"
+               min="0"
+               max="{{ m.available_quantity }}"
+               value="0">
+    </div>
+{% endfor %}
+</div>
+
+<div class="section">
+    <button onclick="confirmOrder()">Confirm Order</button>
+</div>
+
+<div class="section" id="paymentSection" style="display:none;">
+    <h3>Total: ₹<span id="totalAmount">0</span></h3>
+
+    {% if is_premium %}
+        <button class="pay-btn" onclick="pay('cod')">Cash on Delivery</button>
+    {% endif %}
+
+    <button class="pay-btn" onclick="pay('online')">Pay Online</button>
+</div>
+
+<a href="{{ url_for('user.dashboard') }}">⬅ Back</a>
+
+<script>
+/* ================= TIME → CATEGORY ================= */
+function getCategoryByHour(hour) {
+    if (hour >= 6 && hour < 12) return "Breakfast";
+    if (hour >= 12 && hour < 16) return "Lunch";
+    if (hour >= 16 && hour < 19) return "Tea";
+    return "Dinner";
+}
+
+/* ================= HELPERS ================= */
+function getCategories(card) {
+    return card.dataset.category
+        .split(",")
+        .map(c => c.trim());
+}
+
+const ALL_DAY_CATEGORIES = ["Breakfast", "Lunch", "Dinner", "Tea"];
+
+/* ================= INITIAL LOAD ================= */
+/* Show ONLY foods available for ALL times */
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".item-card").forEach(card => {
+        const categories = getCategories(card);
+
+        const isAllDay = ALL_DAY_CATEGORIES.every(cat =>
+            categories.includes(cat)
+        );
+
+        card.style.display = isAllDay ? "block" : "none";
+
+        if (!isAllDay) {
+            card.querySelector(".qty").value = 0;
+        }
+    });
+});
+
+/* ================= FILTER ON TIME ================= */
+document.getElementById("scheduleTime").addEventListener("change", function () {
+    if (!this.value) return;
+
+    const hour = new Date(this.value).getHours();
+    const activeCategory = getCategoryByHour(hour);
+
+    document.querySelectorAll(".item-card").forEach(card => {
+        const categories = getCategories(card);
+        const qtyInput = card.querySelector(".qty");
+
+        if (categories.includes(activeCategory)) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+            qtyInput.value = 0;
+        }
+    });
+});
+
+/* ================= CONFIRM ORDER ================= */
+function confirmOrder() {
+    const scheduleTime = document.getElementById("scheduleTime").value;
+    const people = document.getElementById("people").value;
+
+    if (!scheduleTime) {
+        alert("Please select date & time");
+        return;
+    }
+
+    if (!people || people <= 0) {
+        alert("Please enter number of people");
+        return;
+    }
+
+    let total = 0;
+    let hasItem = false;
+
+    document.querySelectorAll(".item-card").forEach(card => {
+        if (card.style.display === "none") return;
+
+        const qty = parseInt(card.querySelector(".qty").value);
+        const price = parseFloat(card.dataset.price);
+
+        if (qty > 0) {
+            total += qty * price;
+            hasItem = true;
+        }
+    });
+
+    if (!hasItem) {
+        alert("Select at least one item");
+        return;
+    }
+
+    document.getElementById("totalAmount").innerText = total.toFixed(2);
+    document.getElementById("paymentSection").style.display = "block";
+}
+
+/* ================= PAYMENT ================= */
+function pay(mode) {
+    const scheduleTime = document.getElementById("scheduleTime").value;
+    const people = document.getElementById("people").value;
+
+    if (!scheduleTime) {
+        alert("Please select date & time");
+        return;
+    }
+
+    if (!people || people <= 0) {
+        alert("Enter number of people");
+        return;
+    }
+
+    const items = [];
+
+    document.querySelectorAll(".item-card").forEach(card => {
+        if (card.style.display === "none") return;
+
+        const qty = parseInt(card.querySelector(".qty").value);
+        if (qty > 0) {
+            items.push({
+                menu_id: card.dataset.id,
+                qty: qty,
+                price: card.dataset.price
+            });
+        }
+    });
+
+    if (items.length === 0) {
+        alert("No items selected");
+        return;
+    }
+
+    fetch("/user/place-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
+        body: JSON.stringify({
+            hotel_id: {{ hotel.id }},
+            total_people: people,
+            total_amount: document.getElementById("totalAmount").innerText,
+            scheduled_time: scheduleTime,
+            items: items,
+            payment_mode: mode
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (!data.success) {
+            alert(data.error || "Order failed");
+            return;
+        }
+
+        // 🔥 FINAL CORRECT FLOW
+        if (data.payment_url) {
+            // ONLINE
+            window.location.href = data.payment_url;
+        } else if (data.success_url) {
+            // COD
+            window.location.href = data.success_url;
+        } else {
+            alert("Unexpected response from server");
+        }
+    })
+    .catch(err => {
+        console.error("PAYMENT ERROR:", err);
+        alert("Payment failed. Please try again.");
+    });
+}
+
+</script>
+
+
+</body>
+</html>

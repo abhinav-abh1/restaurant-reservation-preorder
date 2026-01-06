@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Successful</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Order Success Styles -->
+    <link rel="stylesheet" href="/static/css/order-success.css">
+</head>
+<body>
+
+    <div class="order-success-card">
+
+        <h2>Order Confirmed 🎉</h2>
+
+        <p>
+            <b>Order ID:</b>
+            <span>{{ order_id }}</span>
+        </p>
+
+        <hr>
+
+        <img src="{{ qr_url }}"
+             alt="Order QR Code"
+             width="220">
+
+        <a href="{{ qr_url }}" download class="primary-btn">
+            ⬇ Download QR Code
+        </a>
+
+        <a href="/user/dashboard" class="secondary-btn">
+            Go to Dashboard
+        </a>
+
+    </div>
+
+</body>
+</html>

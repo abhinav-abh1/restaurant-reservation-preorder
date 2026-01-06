@@ -1,0 +1,256 @@
+/* ===============================
+   ROOT VARIABLES – MODERN ADMIN
+================================ */
+:root {
+    --primary: #4f46e5;        /* Main brand color */
+    --primary-soft: rgba(79,70,229,0.1);
+    --primary-light: #6366f1;
+
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --text: #0f172a;
+    --muted: #64748b;
+    --border: #e5e7eb;
+
+    --success: #16a34a;
+    --warning: #f59e0b;
+    --danger: #dc2626;
+    --info: #0284c7;
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+
+    --shadow-sm: 0 6px 18px rgba(15,23,42,0.06);
+    --shadow-md: 0 18px 40px rgba(15,23,42,0.08);
+}
+
+/* ===============================
+   RESET
+================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* ===============================
+   PAGE CONTAINER
+================================ */
+.orders-management {
+    max-width: 1400px;
+    margin: 28px auto;
+    padding: 20px;
+}
+
+/* ===============================
+   HEADER
+================================ */
+.section-header {
+    background: linear-gradient(
+        135deg,
+        var(--primary),
+        var(--primary-light)
+    );
+    color: #fff;
+    border-radius: var(--radius-lg);
+    padding: 24px 28px;
+    margin-bottom: 26px;
+    box-shadow: var(--shadow-md);
+}
+
+.section-header h2 {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.section-header p {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* ===============================
+   TABLE CONTAINER
+================================ */
+.table-container {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+}
+
+/* ===============================
+   TABLE
+================================ */
+.responsive-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.responsive-table thead {
+    background: var(--primary-soft);
+}
+
+.responsive-table th {
+    padding: 16px;
+    text-align: left;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.responsive-table td {
+    padding: 16px;
+    font-size: 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+}
+
+.responsive-table tbody tr {
+    transition: background 0.25s ease, transform 0.15s ease;
+}
+
+.responsive-table tbody tr:hover {
+    background: var(--primary-soft);
+    transform: scale(1.003);
+}
+
+/* ===============================
+   STATUS BADGES
+================================ */
+.status-badge {
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* dynamic status support */
+.status-paid,
+.status-completed,
+.status-success {
+    background: rgba(22,163,74,0.15);
+    color: var(--success);
+}
+
+.status-pending {
+    background: rgba(245,158,11,0.18);
+    color: var(--warning);
+}
+
+.status-cancelled,
+.status-failed {
+    background: rgba(220,38,38,0.15);
+    color: var(--danger);
+}
+
+.status-processing {
+    background: rgba(2,132,199,0.15);
+    color: var(--info);
+}
+
+/* ===============================
+   EMPTY STATE
+================================ */
+.empty-state-table {
+    padding: 64px 20px;
+    text-align: center;
+    color: var(--muted);
+}
+
+.empty-state-table i {
+    color: var(--primary);
+    margin-bottom: 14px;
+}
+
+.empty-state-table p {
+    font-size: 15px;
+}
+
+/* ===============================
+   TABLET RESPONSIVE
+================================ */
+@media (max-width: 992px) {
+    .section-header h2 {
+        font-size: 22px;
+    }
+
+    .responsive-table th,
+    .responsive-table td {
+        padding: 14px;
+        font-size: 13px;
+    }
+}
+
+/* ===============================
+   MOBILE RESPONSIVE (CARD TABLE)
+================================ */
+@media (max-width: 768px) {
+    .responsive-table thead {
+        display: none;
+    }
+
+    .responsive-table,
+    .responsive-table tbody,
+    .responsive-table tr,
+    .responsive-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .responsive-table tr {
+        background: var(--surface);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-sm);
+        margin-bottom: 18px;
+        padding: 10px;
+    }
+
+    .responsive-table td {
+        border: none;
+        padding: 10px 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 13px;
+    }
+
+    .responsive-table td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: var(--muted);
+        margin-right: 10px;
+    }
+}
+
+/* ===============================
+   SMALL PHONES
+================================ */
+@media (max-width: 480px) {
+    .orders-management {
+        padding: 12px;
+    }
+
+    .section-header {
+        padding: 18px;
+    }
+
+    .section-header h2 {
+        font-size: 20px;
+    }
+
+    .status-badge {
+        font-size: 11px;
+        padding: 5px 10px;
+    }
+}

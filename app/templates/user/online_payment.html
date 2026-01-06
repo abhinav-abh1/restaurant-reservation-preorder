@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Processing Payment</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Payment Processing Styles -->
+    <link rel="stylesheet" href="/static/css/payment-processing.css">
+</head>
+<body>
+
+    <div class="payment-processing-card">
+        <h2>Processing Payment...</h2>
+        <p>Please wait, do not refresh</p>
+
+        <div class="loader">
+            <img src="/static/images/payment-loader.gif"
+                 alt="Processing payment"
+                 width="120">
+        </div>
+    </div>
+
+    <script>
+        setTimeout(() => {
+            window.location.href = "/user/payment-success/{{ order_id }}";
+        }, 3000); // simulate GPay / UPI delay
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,137 @@
+/* Shared styles for all admin tables (hotels, users, etc.) */
+.user-management,
+.hotel-management {
+    padding: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-header h2 {
+    font-size: 2.2rem;
+    color: #1e293b;
+    margin-bottom: 8px;
+}
+
+.section-header p {
+    color: #64748b;
+    font-size: 1.1rem;
+}
+
+.table-container {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    overflow-x: auto;
+}
+
+.responsive-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.responsive-table thead {
+    background: #6366f1;
+    color: #fff;
+}
+
+.responsive-table th {
+    padding: 18px 15px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.responsive-table td {
+    padding: 18px 15px;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: middle;
+}
+
+.responsive-table tr:hover {
+    background: #f8f9ff;
+    transition: background 0.3s ease;
+}
+
+/* Status Badges - Shared */
+.status-badge {
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.status-premium { background: #d4edda; color: #155724; }
+.status-premium i { margin-right: 6px; }
+.status-regular { background: #e2e3e5; color: #41464b; }
+
+/* Add hotel-specific badges if needed */
+.status-approved { background: #d4edda; color: #155724; }
+.status-suspended { background: #fff3cd; color: #856404; }
+.status-blacklisted { background: #f8d7da; color: #721c24; }
+.status-pending, .status-rejected { background: #e2e3e5; color: #41464b; }
+
+/* License link (for hotels) */
+.license-link { color: #6366f1; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+.license-link:hover { color: #4f46e5; text-decoration: underline; }
+.na-text { color: #94a3b8; font-style: italic; }
+
+/* Empty State */
+.empty-state-table {
+    text-align: center;
+    padding: 60px 20px;
+    color: #64748b;
+}
+
+.empty-state-table i {
+    color: #cbd5e1;
+    margin-bottom: 16px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .responsive-table thead { display: none; }
+    .responsive-table tr {
+        display: block;
+        margin-bottom: 20px;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        background: #fff;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        padding: 15px;
+    }
+    .responsive-table td {
+        display: block;
+        text-align: right;
+        padding: 10px 0;
+        border: none;
+        position: relative;
+        padding-left: 120px;
+    }
+    .responsive-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        font-weight: 600;
+        color: #4b5563;
+        width: 100px;
+        text-align: left;
+    }
+    .responsive-table td[data-label="Full Name"],
+    .responsive-table td[data-label="Hotel Name"] {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #1e293b;
+        text-align: left;
+        padding-left: 15px;
+    }
+    .responsive-table td[data-label="Full Name"]::before,
+    .responsive-table td[data-label="Hotel Name"]::before {
+        display: none;
+    }
+}

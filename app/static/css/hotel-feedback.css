@@ -1,0 +1,127 @@
+:root {
+  --primary: #6B8E23;
+  --accent: #D9822B;
+  --text: #2B2B2B;
+  --muted: #6B7280;
+  --card: #FFFFFF;
+  --border: #E4DED4;
+  --bg: #F3EFE8;
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body */
+body {
+  font-family: "Inter", "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Page */
+.feedback-page {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+/* Header */
+.feedback-header {
+  background: var(--card);
+  padding: 24px 28px;
+  border-radius: 22px;
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.06);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.feedback-header h2 {
+  font-size: 26px;
+}
+
+/* Back Link */
+.back-link {
+  text-decoration: none;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Card */
+.feedback-card {
+  background: var(--card);
+  padding: 24px;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  box-shadow: 0 14px 36px rgba(0,0,0,0.08);
+}
+
+/* Table Wrapper */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+}
+
+thead {
+  background: #F8F6F1;
+}
+
+th, td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+
+th {
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* Rows */
+tbody tr:hover {
+  background: #FAF9F5;
+}
+
+/* Rating */
+.rating {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* Feedback text */
+.feedback-text {
+  color: var(--muted);
+  max-width: 380px;
+  line-height: 1.5;
+}
+
+/* Empty State */
+.empty-text {
+  text-align: center;
+  font-size: 15px;
+  color: var(--muted);
+  margin-top: 60px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .feedback-header {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+}
